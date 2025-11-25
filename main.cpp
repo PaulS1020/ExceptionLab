@@ -57,7 +57,8 @@ int main() {
 
     // STUDENT TODO: Wrap the entire 'while' loop in a try...catch block
     // that catches a ParseException.
-    
+
+    try {
     // Read from the file one "word" at a time
     while (file >> shapeType) {
         lineNumber++;
@@ -65,38 +66,54 @@ int main() {
         if (shapeType == "square") {
             double side;
             file >> side;
-            
-            // STUDENT TODO: Wrap the call to calculateArea in a 
-            // try...catch block to handle std::invalid_argument.
-            double area = calculateArea(side); // Call library function
-            cout << "Line " << lineNumber << ": Square Area: " << area << endl;
 
+            // STUDENT TODO: Wrap the call to calculateArea in a
+            // try...catch block to handle std::invalid_argument.
+
+            try {
+                double area = calculateArea(side); // Call library function
+                cout << "Line " << lineNumber << ": Square Area: " << area << endl;
+
+            }
+            catch (const std::invalid_argument& e) {
+                cerr << "Line " << lineNumber << ": " << e.what() << endl;
+            }
         }
         else if (shapeType == "rectangle") {
             double length, width;
             file >> length >> width;
-            
-            // STUDENT TODO: Wrap the call to calculateArea in a 
+
+            // STUDENT TODO: Wrap the call to calculateArea in a
             // try...catch block to handle std::invalid_argument.
-            double area = calculateArea(length, width); // Call overloaded library function
-            cout << "Line " << lineNumber << ": Rectangle Area: " << area << endl;
+            try{
+                double area = calculateArea(length, width); // Call overloaded library function
+                cout << "Line " << lineNumber << ": Rectangle Area: " << area << endl;
+            }
+            catch (const std::invalid_argument& e) {
+                cerr << "Line " << lineNumber << ": " << e.what() << endl;
+            }
         }
         else if (shapeType == "circle") {
             double radius;
             file >> radius;
 
-            // STUDENT TODO: Wrap the call to calculateCircleArea in a 
+            // STUDENT TODO: Wrap the call to calculateCircleArea in a
             // try...catch block to handle std::invalid_argument.
-            double area = calculateCircleArea(radius); // Call library function
-            cout << "Line " << lineNumber << ": Circle Area: " << area << endl;
+            try {
+                double area = calculateCircleArea(radius); // Call library function
+                cout << "Line " << lineNumber << ": Circle Area: " << area << endl;
+            }
+            catch (const std::invalid_argument& e) {
+                cerr << "Line " << lineNumber << ": " << e.what() << endl;
+            }
         }
         else {
-            // STUDENT TODO: Replace this 'cerr' statement with a 
+            // STUDENT TODO: Replace this 'cerr' statement with a
             // 'throw ParseException("Unknown shape type: " + shapeType, lineNumber);'
             cerr << "Line " << lineNumber << ": Error: Unknown shape type: " << shapeType << endl;
         }
     }
-    
+
     // The catch block for ParseException should go here.
     // catch (const ParseException& e) { ... }
 
@@ -104,7 +121,7 @@ int main() {
     // --- 3. Cleanup ---
     cout << "--- Processing Complete ---" << endl;
     file.close();
-    
+
     return 0; // Successful execution
 }
 

@@ -5,8 +5,8 @@
  * This file defines the interfaces for custom exceptions,
  * including FileOpenException and ParseException.
  *
- * @author [Your Name Here]
- * @date [Current Date]
+ * @author Paul Soy
+ * @date 11/24/25
  * @version 1.0
  */
 
@@ -19,6 +19,7 @@
  * @class FileOpenException
  * @brief Exception thrown when a file fails to open.
  */
+
 class FileOpenException : public std::exception {
 private:
     std::string msg;
